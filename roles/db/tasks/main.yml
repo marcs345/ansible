@@ -1,0 +1,35 @@
+---
+
+- name: Install EPEL repo
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
+
+- name: Add Some repo
+  yum_repository:
+    name: mariadb
+    description: Some YUM repo
+    baseurl: http://yum.mariadb.org/10.1/centos7-amd64
+    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    gpgcheck: yes
+
+- name: Install MariaDB package
+  yum: name={{ item }} state=installed
+  with_items:
+   - MariaDB-server
+   - MariaDB-client
+   - MySQL-python
+
+- name: Install Git
+  yum: name=git state=present
+
+- name: Install wget
+  yum: name=wget state=present
+
+- name: Create Application Database
+  mysql_db: name={{ mariadb_database }} state=present login_user=root login_password={{ mariadb_root_password }}
+
+- name: mariadb | Create users
+  mysql_user: name={{ mariadb.user }} password={{ mariadb.password }} priv={{ mariadb_database }}.*:ALL state=present login_user=root login_password={{ mariadb.root_password }}
+
+#- name: mariadb | Impor  dump
+#  copy: src={{ mariadb.dump }} dest=/tmp
+#  mysql_db: name={{ mariadb.database }} state=import login_user=root login_password={{ mariadb.root_password }} target=/tmp/dump.sql.bz2

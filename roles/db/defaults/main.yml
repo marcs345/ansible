@@ -1,0 +1,10 @@
+---
+
+mysql_port: 3306
+
+mariadb_database: enzo
+
+mariadb_password: enzopasswd
+
+mariadb_root_password: rootenzopasswd
+

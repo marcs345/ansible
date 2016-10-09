@@ -1,0 +1,19 @@
+---
+
+- name: Install EPEL repo
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm state=present
+
+- name: Install Nginx repo
+  yum: name=http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm state=present
+
+- name: Install webtatic repo
+  yum: name=https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+- name: Upgrade all packages
+  yum: name=* state=latest
+
+- name: Install Git
+  yum: name=git state=present
+
+- name: Install wget
+  yum: name=wget state=present

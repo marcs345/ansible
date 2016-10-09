@@ -1,0 +1,7 @@
+---
+
+docroot: /var/www/html/enzo/
+servername: test.domain.local
+nginx_conf_file_path: /etc/nginx/conf.d/default.conf
+root_group: wheel
+

@@ -1,0 +1,10 @@
+---
+hostname: "db"
+name: "db-instance"
+group: "my rules"
+instance_type: "t2.micro"
+image: "ami-775e4f16"
+region: "us-west-2"
+keypair: "kopustura234"
+
+

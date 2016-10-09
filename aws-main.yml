@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  name: launch ec2 instances
+  connection: local
+  gather_facts: no   
+  roles:
+     - { role: ec2-launch-web, tags: ['launch-web,', 'launch-web-role']}
+     - { role: ec2-launch-db, tags: ['launch-db,', 'launch-db-role']}
+
+- hosts: tag_Name_web
+  name: provision web
+  user: ec2-user
+  sudo: True
+  gather_facts: false
+  roles:
+     - { role: web, tags: ['web', 'web-role']}
+     - { role: app, tags: ['app', 'app-role']}
+
+- hosts: tag_Name_db
+  name: provision db
+  user: ec2-user
+  sudo: True
+  gather_facts: false
+  roles:
+     - { role: db, tags: ['db', 'db-role']}
+
